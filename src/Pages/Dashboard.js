@@ -6,7 +6,7 @@ import { getDocs, collection, deleteDoc, doc, query, where } from "firebase/fire
 import { db, auth, firestore } from "../firebase-config";
 
 function Dashboard() {
-  const userInfoRef = collection(db, "User Properties")
+  const userInfoRef = collection(db, "UserProperties")
   const [userData, setUserData] = useState(null);
 
   //Timeline
@@ -30,11 +30,12 @@ function Dashboard() {
     //Start of data retrival 
     const getData = async () => {
       const userId = auth.currentUser.uid;
-      const docRef = doc(collection(db, 'User Properties'));
-      //const q = query(docRef, where("uuid" , "==", userId))
-      const snap = await getDocs(docRef.doc.map((doc) => ({ ...doc.data(), id: doc.id })));
-
+      const docRef = collection(db, 'UserProperties');
+      const q = query(docRef, where("uuid" , "==", userId))
+      const snap = await getDocs(q);
+      //userInfoRef.doc.map((doc) => ({ ...doc.data(), id: doc.id }))
       setUserData(snap)
+      console.log(snap);
     }
     getData();
     const fetchData = async () => {
