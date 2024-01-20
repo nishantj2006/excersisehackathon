@@ -47,6 +47,11 @@ body{
   background: #1d2b3a;
 }
 
+label
+{
+  color: rgba(255, 255, 255, 0.827);
+}
+
 .createGoalButton {
     background-color: #dddddd;
     color: black;
