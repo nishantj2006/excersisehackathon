@@ -39,17 +39,40 @@
   }
 }
 
+body{
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  gap:30px;
+  background: #1d2b3a;
+}
+
 .createGoalButton {
-  background-color: #3498db;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 5px;
+    background-color: #dddddd;
+    color: black;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 1em;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 12px;
+    font-family: 'Raedex Pro', sans-serif;
+    outline: none; 
 }
 
 /* Highlighted button styles */
 .createGoalButton.highlighted {
-  background-color: yellow;
+  background: #009578;
+  color: #ffffff;
+} 
+
+.inputBox{
+  width: 120px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.819);
+  color: #fff;
+  font-size: 12px;
+  font-family: 'Raedex Pro', sans-serif;
+  background: #1d2b3a;
 }
+
