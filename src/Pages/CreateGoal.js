@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { db } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 import { addDoc, collection } from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
+import Profile from "../profile";
 
 function CreateGoal() {
     const [otherSelectedD, setOtherSelectedD] = useState(false);
@@ -38,9 +39,7 @@ function CreateGoal() {
     const [goal, setGoal] = useState("");
     const [targetWeight, setTargetWeight] = useState("");
     const [targetTime, setTargetTime] = useState("");
-
-    const userInfoRef = collection(db, "User Properties")
-
+    const userInfoRef = collection(db, "UserProperties")
     const setUserData = async () => {
         await addDoc(userInfoRef, {
             gender,
@@ -53,6 +52,8 @@ function CreateGoal() {
             goal,
             targetWeight,
             targetTime,
+            user_email: auth.currentUser.uid,
+            
         });
         navigate('/dashboard')
     }
@@ -63,7 +64,8 @@ function CreateGoal() {
                 <h1>Create Your Goal</h1>
                 <div className="inputGp">
                     <label>Gender</label>
-                    <button  className="createGoalButton" onClick={() => setGender("Male")}>Male</button>
+                    <button  className={`createGoalButton ${gender === 'Male' ? 'highlighted' : ''}`}
+            onClick={() => setGender('Male')}>Male</button>
                     <button  className="createGoalButton" onClick={() => setGender("Female")}>Female</button>
                     <button  className="createGoalButton" onClick={() => setGender("Other")}>Other</button>
                 </div>
