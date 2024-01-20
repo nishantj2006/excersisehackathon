@@ -32,8 +32,8 @@ function Dashboard() {
       const userId = auth.currentUser.uid;
       const docRef = doc(collection(db, 'User Properties'));
       //const q = query(docRef, where("uuid" , "==", userId))
-      const snap = await getDocs(docRef);
-      
+      const snap = await getDocs(docRef.doc.map((doc) => ({ ...doc.data(), id: doc.id })));
+
       setUserData(snap)
     }
     getData();
