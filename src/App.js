@@ -4,7 +4,7 @@ import LogoutButton from './logout';
 import Profile from './profile';
 
 function App() {
-  const[isAuth, setIsAuth] = useState(setIsAuth);
+  // const[isAuth, setIsAuth] = useState(setIsAuth);
 
   return (
     <div className="App">
