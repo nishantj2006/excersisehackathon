@@ -4,7 +4,7 @@ function Home() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    navigate('')
+    navigate('/dashboard')
   })
   return (
     <div className="home">

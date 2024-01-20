@@ -4,8 +4,8 @@ import LogoutButton from './logout';
 import Profile from './profile';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
-import Dashboard from './pages/Dashboard';
 import CreateGoal from './pages/CreateGoal';
+import Dashboard from './pages/Dashboard';
 import ReportProgress from "./pages/ReportProgress"
 import LogMeals from './pages/LogMeals';
 
@@ -17,7 +17,6 @@ function App() {
       {/*Routes*/}
       <Router>
         <nav>
-          <Link to="/"> Home </Link>
           <Link to="/dashboard"> Dashboard </Link>
           <Link to="/creategoal"> Create Goal </Link>
           <Link to="/reportprogress"> Report Progress </Link>
