@@ -21,6 +21,12 @@ function CreateGoal() {
     const otherClickedG = () => {
         setOtherSelectedG(true);
     }
+
+    const [otherSelectedF, setOtherSelectedF] = useState(false);
+
+    const otherClickedF = () => {
+        setOtherSelectedF(true);
+    }
     let navigate = useNavigate();
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
@@ -30,8 +36,10 @@ function CreateGoal() {
     const [diet, setDiet] = useState("");
     const [disease, setDisease] = useState("");
     const [goal, setGoal] = useState("");
+    const [targetWeight, setTargetWeight] = useState("");
+    const [targetTime, setTargetTime] = useState("");
 
-    const userInfoRef = collection(db, "UserProperties")
+    const userInfoRef = collection(db, "User Properties")
 
     const setUserData = async () => {
         await addDoc(userInfoRef, {
@@ -42,7 +50,9 @@ function CreateGoal() {
             Active,
             diet,
             disease,
-            goal
+            goal,
+            targetWeight,
+            targetTime,
         });
         navigate('/dashboard')
     }
@@ -65,17 +75,21 @@ function CreateGoal() {
                     <label>Height: </label>
                     <input placeholder="Height..." onChange={(event) => { setHeight(event.target.value) }} />
                 </div>
-                <div className="imputGp">
+                <div className="inputGp">
                     <label>Weight:</label>
                     <input placeholder="Weight..." onChange={(event) => { setWeight(event.target.value) }} />
                 </div>
-                <div className="imputGp">
+                <div className="inputGp">
+                    <label>Target Weight:</label>
+                    <input placeholder="Weight..." onChange={(event) => { setTargetWeight(event.target.value) }} />
+                </div>
+                <div className="inputGp">
                     <label>How Active Are You?:</label>
                     <button  className="createGoalButton" onClick={() => setActive("Very Active")}>Very Active</button>
                     <button  className="createGoalButton" onClick={() => setActive("Somewhat Active")}>Somewhat active</button>
                     <button  className="createGoalButton" onClick={() => setActive("Not Active")}>Not Active</button>
                 </div>
-                <div className="imputGp">
+                <div className="inputGp">
                     <label>Are you any of the following:</label>
                     <button  className="createGoalButton" onClick={() => setDiet("Vegan")}>Vegan</button>
                     <button  className="createGoalButton" onClick={() => setDiet("Vegetarian")}>Vegetarian</button>
@@ -84,7 +98,7 @@ function CreateGoal() {
                     {otherSelectedD ? (<input placeholder="Specific diet here..." onChange={(event) => { setDiet(event.target.value) }} />) : (<br />)}
                     <button  className="createGoalButton" onClick={() => setDiet("No Dietary Restrictions")}>None</button>
                 </div>
-                <div className="imputGp">
+                <div className="inputGp">
                     <label>Any Underlying Diseases?</label>
                     <button  className="createGoalButton" onClick={() => setDisease("High Blood Pressure")}>High Blood Pressure</button>
                     <button  className="createGoalButton" onClick={() => setDisease("High Cholestrol")}>High Cholestrol</button>
@@ -94,7 +108,15 @@ function CreateGoal() {
                     {otherSelectedI ? (<input placeholder="Specific disease here..." onChange={(event) => { setDisease(event.target.value) }} />) : (<br />)}
                     <button  className="createGoalButton" onClick={() => setDisease("No underlying diseases")}>None</button>
                 </div>
-                <div className="imputGp">
+                <div className="inputGp">
+                    <label>What Time Do You Want to Reach this Weight by?</label>
+                    <button className="createGoalButton"  onClick={() => setTargetTime("1-3 months")}>1-3 months</button>
+                    <button  className="createGoalButton" onClick={() => setTargetTime("3-6 monts")}>3-6 months</button>
+                    <button  className="createGoalButton" onClick={() => setTargetTime("6-12 months")}>6-12 months</button>
+                    <button  className="createGoalButton" onClick={otherClickedF}>Other</button>
+                    {otherSelectedF ? (<input placeholder="To have [insert your goal]..." onChange={(event) => { setTargetTime(event.target.value) }} />) : (<br />)}
+                </div>
+                <div className="inputGp">
                     <label>Give yourself a main goal</label>
                     <button className="createGoalButton"  onClick={() => setGoal("to be fit")}>To be Fit</button>
                     <button  className="createGoalButton" onClick={() => setGoal("to lost weight")}>To Lose Weight</button>
