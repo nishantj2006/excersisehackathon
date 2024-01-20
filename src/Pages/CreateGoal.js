@@ -1,10 +1,22 @@
 import { useState } from "react";
 
 function CreateGoal() {
-    const [otherSelected, setOtherSelected] = useState(setOtherSelected);
+    const [otherSelectedD, setOtherSelectedD] = useState(false);
 
-    const otherClicked = () => {
-        setOtherSelected = true;
+    const otherClickedD = () => {
+        setOtherSelectedD(true);
+    }
+
+    const [otherSelectedI, setOtherSelectedI] = useState(false);
+
+    const otherClickedI = () => {
+        setOtherSelectedI(true);
+    }
+
+    const [otherSelectedG, setOtherSelectedG] = useState(false);
+
+    const otherClickedG= () => {
+        setOtherSelectedG(true);
     }
     return (
         <div className="createGoal">
@@ -39,8 +51,8 @@ function CreateGoal() {
                     <button>Vegan</button>
                     <button>Vegetarian</button>
                     <button>Pescatarian</button>
-                    <button onClick={otherClicked}>Other</button>
-                    {otherSelected ? (<input placeholder="Specific diet here..."></input>) : (<br />)}
+                    <button onClick={otherClickedD}>Other</button>
+                    {otherSelectedD ? (<input placeholder="Specific diet here..."></input>) : (<br />)}
                 </div>
                 <div className="imputGp">
                     <label>Any Underlying Diseases?</label>
@@ -48,8 +60,8 @@ function CreateGoal() {
                     <button>High Cholestrol</button>
                     <button>Diabetes</button>
                     <button>Heart Disease</button>
-                    <button onClick={otherClicked}>Other</button>
-                    {otherSelected ? (<input placeholder="Specific disease here..."></input>) : (<br />)}
+                    <button onClick={otherClickedI}>Other</button>
+                    {otherSelectedI ? (<input placeholder="Specific disease here..."></input>) : (<br />)}
                     <button>None</button>
                 </div>
                 <div className="imputGp">
@@ -57,10 +69,10 @@ function CreateGoal() {
                     <button>To be fit</button>
                     <button>To Lose Weight</button>
                     <button>To have a Healtheir Lifestyle</button>
-                    <button onClick={otherClicked}>Other</button>
-                    {otherSelected ? (<input placeholder="To have [insert your goal]..."></input>) : (<br />)}
+                    <button onClick={otherClickedG}>Other</button>
+                    {otherSelectedG ? (<input placeholder="To have [insert your goal]..."></input>) : (<br />)}
                 </div>
-
+                <button>Submit</button>
             </div>
         </div>
     );
