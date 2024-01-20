@@ -1,3 +1,4 @@
+
 import './App.css';
 import LoginButton from './login';
 import LogoutButton from './logout';
@@ -5,21 +6,14 @@ import Profile from './profile';
 import { useState } from 'react';
 import { auth } from './firebase-config';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-<<<<<<< HEAD
-import Home from "./pages/Home";
-import CreateGoal from './pages/CreateGoal';
-import Dashboard from './pages/Dashboard';
-import ReportProgress from "./pages/ReportProgress"
-import LogMeals from './pages/LogMeals';
-import { signOut } from 'firebase/auth';
-import Login from './pages/Login';
-=======
+
 import Home from "./Pages/Home";
 import CreateGoal from './Pages/CreateGoal';
 import Dashboard from './Pages/Dashboard';
 import ReportProgress from "./Pages/ReportProgress"
 import LogMeals from './Pages/LogMeals';
->>>>>>> 6dc10853aedf6cb51d6cc0ae111c8a6894000df8
+import Login from './Pages/Login';
+import  {signOut} from 'firebase/auth';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
