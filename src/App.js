@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { auth } from './firebase-config';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import Home from "./pages/Home";
-import CreateGoal from './pages/CreateGoal';
-import Dashboard from './pages/Dashboard';
-import ReportProgress from "./pages/ReportProgress"
-import LogMeals from './pages/LogMeals';
+import Home from "./Pages/Home";
+import CreateGoal from './Pages/CreateGoal';
+import Dashboard from './Pages/Dashboard';
+import ReportProgress from "./Pages/ReportProgress"
+import LogMeals from './Pages/LogMeals';
 import { signOut } from 'firebase/auth';
-import Login from './pages/Login';
+import Login from './Pages/Login';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
