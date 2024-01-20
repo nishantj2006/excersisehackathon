@@ -6,8 +6,12 @@ import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 import CreateGoal from './pages/CreateGoal'
 import ReportProgress from './pages/ReportProgress'
+import { auth, db } from "./firebase-config.js"
+import { useState } from 'react';
 
 function App() {
+  const[isAuth, setIsAuth] = useState(setIsAuth);
+
   return (
     <div className="App">
       {/*Routes*/}
