@@ -52,7 +52,7 @@ function CreateGoal() {
             goal,
             targetWeight,
             targetTime,
-            user_email: auth.currentUser.uid,
+            uuid: auth.currentUser.uid,
             
         });
         navigate('/dashboard')

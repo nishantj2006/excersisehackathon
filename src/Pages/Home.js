@@ -4,7 +4,7 @@ function Home() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    navigate('/dashboard')
+    navigate('/login')
   })
   return (
     <div className="home">
