@@ -63,7 +63,8 @@ function CreateGoal() {
                 <h1>Create Your Goal</h1>
                 <div className="inputGp">
                     <label>Gender</label>
-                    <button  className="createGoalButton" onClick={() => setGender("Male")}>Male</button>
+                    <button  className={`createGoalButton ${gender === 'Male' ? 'highlighted' : ''}`}
+            onClick={() => setGender('Male')}>Male</button>
                     <button  className="createGoalButton" onClick={() => setGender("Female")}>Female</button>
                     <button  className="createGoalButton" onClick={() => setGender("Other")}>Other</button>
                 </div>

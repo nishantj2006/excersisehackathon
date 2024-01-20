@@ -38,3 +38,18 @@
     transform: rotate(360deg);
   }
 }
+
+.createGoalButton {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+/* Highlighted button styles */
+.createGoalButton.highlighted {
+  background-color: yellow;
+}
