@@ -11,13 +11,13 @@ function Dashboard() {
   const [response, setResponse] = useState('');
   const [FoodData, setFoodData] = useState(null);
   let navigate = useNavigate();
-  let dayCounter1 = 1;
-  let dayCounter2 = 2;
-  let dayCounter3 = 3;
-  let dayCounter4 = 4;
-  let dayCounter5 = 5;
-  let dayCounter6 = 6;
-  let dayCounter7 = 7;
+  const [dayCounter1,setDay1] = useState(1);
+  const [dayCounter2,setDay2] = useState(2);
+  const [dayCounter3,setDay3] = useState(3);
+  const [dayCounter4,setDay4] = useState(4);
+  const [dayCounter5,setDay5] = useState(5);
+  const [dayCounter6,setDay6] = useState(6);
+  const [dayCounter7,setDay7] = useState(7);
   const [dayNum, setDayNum] = useState('');
   const [cals, setCals] = useState([])
   const [breakfast, setBreakfast] = useState([])
@@ -27,16 +27,27 @@ function Dashboard() {
   const foodcalreqs = collection(db, "foodcalsreqs")
   const submitBtn = () => {
     updateNums();
-    this.forceUpdate();
+  }
+  const backBtn = () => {
+    if (dayCounter1 === 1){
+      return;
+    }
+    setDay1(dayCounter1 - 7);
+    setDay2(dayCounter2 - 7);
+    setDay3(dayCounter3 - 7);
+    setDay4(dayCounter4 - 7);
+    setDay5(dayCounter5 - 7);
+    setDay6(dayCounter6 - 7);
+    setDay7(dayCounter7 - 7);
   }
   const updateNums = () => {
-    dayCounter1 += 7;
-    dayCounter2 += 7;
-    dayCounter3 += 7;
-    dayCounter4 += 7;
-    dayCounter5 += 7;
-    dayCounter6 += 7;
-    dayCounter7 += 7;
+    setDay1(dayCounter1 + 7);
+    setDay2(dayCounter2 + 7);
+    setDay3(dayCounter3 + 7);
+    setDay4(dayCounter4 + 7);
+    setDay5(dayCounter5 + 7);
+    setDay6(dayCounter6 + 7);
+    setDay7(dayCounter7 + 7);
   }
   const [bPick, setBPick] = useState('')
   const [lPick, setLPick] = useState('')
@@ -45,49 +56,49 @@ function Dashboard() {
   const rN = Math.round(Math.random(0,14))
   console.log(rN)
   const timelineBtn1 = () => {
-    setDayNum('1');
+    setDayNum(dayCounter1);
     setBPick(breakfast[rN])
     setLPick(lunch[rN])
     setDPick(dinner[rN])
     setBtnClicked(true);
   }
   const timelineBtn2 = () => {
-    setDayNum('2');
+    setDayNum(dayCounter2);
     setBPick(breakfast[rN])
     setLPick(lunch[rN])
     setDPick(dinner[rN])
     setBtnClicked(true);
   }
   const timelineBtn3 = () => {
-    setDayNum('3');
+    setDayNum(dayCounter3);
     setBPick(breakfast[rN])
     setLPick(lunch[rN])
     setDPick(dinner[rN])
     setBtnClicked(true);
   }
   const timelineBtn4 = () => {
-    setDayNum('4');
+    setDayNum(dayCounter4);
     setBPick(breakfast[rN])
     setLPick(lunch[rN])
     setDPick(dinner[rN])
     setBtnClicked(true);
   }
   const timelineBtn5 = () => {
-    setDayNum('5');
+    setDayNum(dayCounter5);
     setBPick(breakfast[rN])
     setLPick(lunch[rN])
     setDPick(dinner[rN])
     setBtnClicked(true);
   }
   const timelineBtn6 = () => {
-    setDayNum('6');
+    setDayNum(dayCounter6);
     setBPick(breakfast[rN])
     setLPick(lunch[rN])
     setDPick(dinner[rN])
     setBtnClicked(true);
   }
   const timelineBtn7 = () => {
-    setDayNum('7');
+    setDayNum(dayCounter7);
     setBPick(breakfast[rN])
     setLPick(lunch[rN])
     setDPick(dinner[rN])
@@ -265,6 +276,7 @@ function Dashboard() {
   return (
     <div className="Dashboard">
       <div className="timeline">
+      <button className="createGoalButton" onClick={backBtn}>Back</button>
         <button className="createGoalButton" onClick={timelineBtn1}>Day {dayCounter1}</button>
         <button className="createGoalButton" onClick={timelineBtn2}>Day {dayCounter2}</button>
         <button className="createGoalButton" onClick={timelineBtn3}>Day {dayCounter3}</button>

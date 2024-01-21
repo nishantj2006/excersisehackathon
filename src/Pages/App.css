@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  height: 100%;
+  width: 100vw;
+  margin: 0;
+  align-content: center;
 }
 
 .App-logo {
@@ -92,7 +96,6 @@ nav{
   display: flex;
   justify-content: flex-end; /* Align items to the right */
   background-color: #333; /* Add your preferred background color */
-  padding: 10px; /* Add padding for better appearance */
   color: white; /* Set text color */
 }
 
@@ -105,30 +108,4 @@ nav{
   color: White;
   font-family: 'Raedex Pro', sans-serif;
 
-} 
-
-
-.sidebar {
-  height: 100vh;
-  width: 20%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: white; 
-  padding-top: 20px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  padding: 10px;
-  color: white;
-  cursor: pointer;
-}
-
-li:hover {
-  background-color: #555;
 }
