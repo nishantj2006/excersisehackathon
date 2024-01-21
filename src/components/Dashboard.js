@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import OPENAI_API_KEY from "../openai";
 import { useState, useEffect } from "react";
 import React from "react";
 import { getDoc, getDocs, collection, query, where, addDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
+
 
 function Dashboard() {
   const [UserData, setUserData] = useState(null);
@@ -146,7 +146,7 @@ function Dashboard() {
         }, {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
           },
         });
 
@@ -196,7 +196,7 @@ function Dashboard() {
         }, {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
           },
         });
 
@@ -223,7 +223,7 @@ function Dashboard() {
         }, {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
           },
         });
 
@@ -250,7 +250,7 @@ function Dashboard() {
         }, {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
           },
         });
 

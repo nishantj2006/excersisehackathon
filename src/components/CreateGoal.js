@@ -4,7 +4,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
 import Profile from "../profile";
 
-function CreateGoal({createdGoal}) {
+function CreateGoal() {
     const [otherSelectedD, setOtherSelectedD] = useState(false);
 
     const otherClickedD = () => {
@@ -56,13 +56,12 @@ function CreateGoal({createdGoal}) {
             
         });
         navigate('/dashboard')
-        createdGoal(true);
     }
 
     return (
         <div className="createGoal">
             <div className="cgContainer">
-                <h1>Create Your Goal</h1>
+                <h1 className = "color">Create Your Goal</h1>
                 <div className="inputGp">
                     <label>Gender</label>
                     <button  className={`createGoalButton ${gender === 'Male' ? 'highlighted' : ''}`}
@@ -111,7 +110,7 @@ function CreateGoal({createdGoal}) {
                     >
                         Other
                     </button>
-                    {otherSelectedD ? (<input placeholder="Specific diet here..." onChange={(event) => { setDiet(event.target.value) }} />) : (<br />)}
+                    {otherSelectedD ? (<input className="inputBox" placeholder="Specific diet here..." onChange={(event) => { setDiet(event.target.value) }} />) : (<br />)}
                     <button className={`createGoalButton ${diet === 'No Dietary Restrictions' ? 'highlighted' : ''}`} onClick={() => { setDiet("No Dietary Restrictions"); setOtherSelectedD(false); }}>
                         None
                     </button>
