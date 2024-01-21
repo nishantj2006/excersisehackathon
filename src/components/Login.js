@@ -4,7 +4,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
 
 
-function Login({setIsAuth}) {
+function Login({setIsAuth, createdGoal}) {
 
     let navigate = useNavigate();
 
@@ -12,7 +12,12 @@ function Login({setIsAuth}) {
         signInWithPopup(auth, provider).then((result) => {
             localStorage.setItem("IsAuth", true);
             setIsAuth(true);
-            navigate("/dashboard");
+            if (createdGoal){
+                navigate("/dashboard");
+            }
+            else{
+                navigate("/creategoal")
+            }
         });
     }
     return(

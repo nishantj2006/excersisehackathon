@@ -1,4 +1,5 @@
-
+import React from 'react';
+import Navbar from './Navbar';
 import './App.css';
 import LoginButton from '../login';
 import LogoutButton from '../logout';
@@ -6,6 +7,7 @@ import Profile from '../profile';
 import { useState } from 'react';
 import { auth } from '../firebase-config';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 
 import Home from '../components/Home';
 import CreateGoal from '../components/CreateGoal';
@@ -50,11 +52,28 @@ function App() {
           <Route path="/creategoal" element={<CreateGoal createdGoal={setCreatedGoal}/>} />
           <Route path="/reportprogress" element={<ReportProgress />} />
           <Route path="/logmeal" element={<LogMeals />} />
-          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+          <Route path="/login" element={<Login setIsAuth={setIsAuth} createdGoal={createdGoal}/>} />
         </Routes>
       </Router>
     </div>
   );
 }
 
+
+
+const navApp = () => {
+  return (
+    <div>
+      <Navbar />
+      {/* Your main content goes here */}
+      <div>
+        <h1>Main Content</h1>
+        {/* Add your other components/content here */}
+      </div>
+    </div>
+  );
+}
+
 export default App;
+
+
