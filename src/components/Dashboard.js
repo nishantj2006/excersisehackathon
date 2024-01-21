@@ -139,7 +139,7 @@ function Dashboard() {
                 `${data[0].weight}lbs. I would describe myself as ${data[0].active}. My dietary restrictions are: ` +
                 `${data[0].diet} and my underlying diseases are: ${data[0].disease}. I want to get to ` +
                 `${data[0].targetWeight}lbs within ${data[0].targetTime} please generate me a dietary plan that includes ` +
-                `optimal calories I can consume for breakfast, lunch, and dinner to get me to my weight goal in the target time. DO NOT UNCLUDE FOOD IDEAS AND DO NOT LIST THEM, PLEASE FOLLOW OUR FORMAT Please format it like this: Breakfast Calories,Lunch Calories,Dinner ` +
+                `optimal calories I can consume for breakfast, lunch, and dinner to get me to my weight goal in the target time. DO NOT UNCLUDE FOOD IDEAS AND DO NOT LIST THEM, PLEASE FOLLOW OUR FORMAT KEEP IN MIND THAT YOU CAN ONLY SEND NUMBERS AND COMMAS Please format it like this: Breakfast Calories,Lunch Calories,Dinner ` +
                 `Calories ONLY LIST THE NUMBERS AND MAKE SURE THE NUMBERS MAKE SENSE. REMEMBER, BREAKFAST CALORIES  HAS LESS THAN LUNCH CALORIES WHICH HAS LESS THAN DINNER CALORIES FIT IN THIS PLEASE. PLEASE ONLY GIVE THE NUMBERS SEPERATED BY COMMAS, PLEASE REMEMBER< YOU ARE ONLY ABLE TO TYPE NUMBERS`
             },
           ],
@@ -152,6 +152,8 @@ function Dashboard() {
 
         const reply = response.data.choices[0].message.content;
         setResponse(reply);
+        const c = reply.split(',')
+        setCals(c)
         //if (!wrote) {
         SetEverythingElseUp();
         //}
@@ -178,8 +180,6 @@ function Dashboard() {
     fetchData();
   }, []);
   const SetEverythingElseUp = () => {
-    const c = response.split(',')
-    setCals(c)
     const GetBr = async () => {
       const endpoint = 'https://api.openai.com/v1/chat/completions';
 

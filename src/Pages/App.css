@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-
+  width:100%;
 }
 
 .App-logo {
@@ -93,7 +93,6 @@ nav{
   display: flex;
   justify-content: flex-end; /* Align items to the right */
   background-color: #333; /* Add your preferred background color */
-  padding: 10px; /* Add padding for better appearance */
   color: white; /* Set text color */
 }
 
@@ -119,14 +118,19 @@ nav{
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 0px; */
-  margin: 0;
-  padding: 0;
   background-color: white;
   padding: 5px;
+  margin-right: 5px;
+  margin-left:5px;
   text-decoration: none;
 
 }
-
+.logoText{
+  margin-left:10px;
+  margin-right: auto;
+  size:70%;
+  font-family: 'Raedex Pro', sans-serif;
+}
 .createLink{
   color:black;
   align-self: center;
@@ -138,7 +142,13 @@ nav{
   padding-left: 40px;
   background-color: white;
   padding: 5px;
+  margin-right: 5px;
   text-decoration: none;
 
+}
+button{
+  background-color: white;
+  margin-top: 17.5px;
+  margin-bottom: 17.5px;
 }
 
