@@ -12,22 +12,21 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Start of data retrieval 
       const userId = auth.currentUser.uid;
       const docRef = collection(db, 'UserProperties');
       const q = query(docRef, where("uuid", "==", userId.toString()));
       const snap = await getDocs(q);
 
-      // Update state with user data
       const userDataArray = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setUserData(userDataArray);
       const data = userDataArray;
-      console.log(userDataArray); // This will log the correct data
+      console.log(userDataArray);
       console.log(data[0].gender);
 
+      const endpoint = 'http://localhost:8080/https://api.openai.com/v1/chat/completions';
+
       try {
-        const response = await axios.post(
-          `https://api.openai.com/v1/chat/completions/`, {
+        const response = await axios.post(endpoint, {
           model: 'gpt-3.5-turbo',
           messages: [
             { role: 'system', content: 'You are a helpful assistant.' },
@@ -42,37 +41,22 @@ function Dashboard() {
         }, {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization' : `Bearer ${OPENAI_API_KEY}`,
-            'Access-Control-Allow-Origin': '*',  // Add this line for CORS
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',  // Add this line for CORS
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization', 
-          }
+            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+          },
         });
 
-        const reply = response.choices[0].message.content;
+        const reply = response.data.choices[0].message.content;
         setResponse(reply);
       } catch (error) {
         console.error('Error:', error);
       }
     };
-    if (UserData == null){
-      fetchData();
-    }
-  }, []); // Empty dependency array means this effect will run once after the initial render
+
+    fetchData();
+  }, []);
 
   console.log(response);
   console.log(UserData);
-
-  //meal ideas
-  const mealIdeas = () => {
-    // First let use select what grain, protein etc etc they are feeling
-    // Using that data, prompt gpt to provide meal ideas and format it in a way that we can parse through it
-  }
-
-  //logMeals
-  const logMeals = () => {
-    navigate('/logmeal');
-  }
 
   return (
     <div className="Dashboard">
@@ -83,7 +67,7 @@ function Dashboard() {
         {/* JSX for meal ideas in the following order: */}
       </div>
       <div className="logMeals">
-        <button onClick={logMeals}>Log Meals</button>
+        <button onClick={() => navigate('/logmeal')}>Log Meals</button>
       </div>
     </div>
   );
