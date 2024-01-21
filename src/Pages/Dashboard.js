@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { getDoc, getDocs, collection, query, where, addDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 
-function Dashboard({ createdGoal, setCreatedGoal }) {
+function Dashboard() {
   const [UserData, setUserData] = useState(null);
   const [response, setResponse] = useState('');
   let navigate = useNavigate();
@@ -13,6 +13,7 @@ function Dashboard({ createdGoal, setCreatedGoal }) {
   const [breakfast, setBreakfast] = useState([])
   const [lunch, setLunch] = useState([])
   const [dinner, setDinner] = useState([]);
+  const [wrote, setWrote] = useState(false);
 
   const foodcalreqs = collection(db, "foodcalsreqs")
   const setFoodCalsReqs = async () => {
@@ -63,6 +64,7 @@ function Dashboard({ createdGoal, setCreatedGoal }) {
 
         const reply = response.data.choices[0].message.content;
         setResponse(reply);
+        if(!wrote)
         SetEverythingElseUp();
         console.log(reply)
       } catch (error) {
@@ -73,8 +75,8 @@ function Dashboard({ createdGoal, setCreatedGoal }) {
     fetchData();
   }, []);
   const SetEverythingElseUp = () => {
-    if (!createdGoal) {
-      setCals(response.split(','))
+    if (!wrote) {
+      setCals(response.split(',').split('.'))
       const GetBr = async () => {
         const endpoint = 'https://api.openai.com/v1/chat/completions';
 
@@ -85,7 +87,7 @@ function Dashboard({ createdGoal, setCreatedGoal }) {
             messages: [
               { role: 'system', content: 'You are a helpful assistant who can only speak in dishes and you dont give any confimation that you understand.' },
               {
-                role: 'user', content: `Hi, please generate 15 breakfast ideas that are under ${cals[0]} Calories. Format them in: DISH IDEA, DISH IDEA etc.`
+                role: 'user', content: `Hi, please generate 15 breakfast ideas that are under ${cals[0]} Calories. Format them in: DISH IDEA, DISH IDEA etc.PLEASE REMEMBER THAT COMMAS GO BETWEEN WORDS NOT PERIODS`
               },
             ],
           }, {
@@ -113,7 +115,7 @@ function Dashboard({ createdGoal, setCreatedGoal }) {
             messages: [
               { role: 'system', content: 'You are a helpful assistant who can only speak in dishes and you dont give any confimation that you understand.' },
               {
-                role: 'user', content: `Hi, please generate 15 lunch ideas that are under ${cals[1]} Calories. Format them in: DISH IDEA, DISH IDEA etc.`
+                role: 'user', content: `Hi, please generate 15 lunch ideas that are under ${cals[1]} Calories. Format them in: DISH IDEA, DISH IDEA etc. PLEASE REMEMBER THAT COMMAS GO BETWEEN WORDS NOT PERIODS`
               },
             ],
           }, {
@@ -141,7 +143,7 @@ function Dashboard({ createdGoal, setCreatedGoal }) {
             messages: [
               { role: 'system', content: 'You are a helpful assistant who can only speak in dishes and you dont give any confimation that you understand.' },
               {
-                role: 'user', content: `Hi, please generate 15 dinner ideas that are under ${cals[2]} Calories. Format them in: DISH IDEA, DISH IDEA etc.`
+                role: 'user', content: `Hi, please generate 15 dinner ideas that are under ${cals[2]} Calories. Format them in: DISH IDEA, DISH IDEA etc.PLEASE REMEMBER THAT COMMAS GO BETWEEN WORDS NOT PERIODS`
               },
             ],
           }, {
@@ -160,6 +162,7 @@ function Dashboard({ createdGoal, setCreatedGoal }) {
           console.error('Error:', error);
         }
       }; GetD();
+      setWrote(true);
     }
   }
 

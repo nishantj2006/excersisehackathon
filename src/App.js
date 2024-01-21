@@ -43,7 +43,7 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard createdGoal={createdGoal} setCreatedGoal={setCreatedGoal}/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/creategoal" element={<CreateGoal createdGoal={setCreatedGoal}/>} />
           <Route path="/reportprogress" element={<ReportProgress />} />
           <Route path="/logmeal" element={<LogMeals />} />
