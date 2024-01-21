@@ -31,10 +31,11 @@ function App() {
     <div className="App">
       {/*Routes*/}
       <Router>
-        <nav className='vertical-navbar'>
+        <nav>
           {!isAuth ? (
-            <Link to="/login"> Login </Link>
-          ) : (
+            // <Link to="/login"> Login </Link>
+<Link></Link>
+            ) : (
             <>
               <Link to="/dashboard"> Dashboard </Link>
               <Link to="/creategoal"> Create Goal </Link>
