@@ -23,7 +23,7 @@ function Dashboard() {
       console.log(userDataArray);
       console.log(data[0].gender);
 
-      const endpoint = 'http://localhost:3000/https://api.openai.com/v1/chat/completions';
+      const endpoint = 'https://api.openai.com/v1/chat/completions';
 
       try {
         const response = await axios.post(endpoint, {
