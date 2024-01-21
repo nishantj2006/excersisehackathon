@@ -2,10 +2,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import OPENAI_API_KEY from "../openai";
 import { useState, useEffect } from "react";
-import { getDocs, collection, query, where, addDoc } from "firebase/firestore";
+import { getDoc, getDocs, collection, query, where, addDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 
-function Dashboard({createdGoal, setCreatedGoal}) {
+function Dashboard({ createdGoal, setCreatedGoal }) {
   const [UserData, setUserData] = useState(null);
   const [response, setResponse] = useState('');
   let navigate = useNavigate();
@@ -15,12 +15,13 @@ function Dashboard({createdGoal, setCreatedGoal}) {
   const [dinner, setDinner] = useState([]);
 
   const foodcalreqs = collection(db, "foodcalsreqs")
-  const setFoodCalsReqs = async() => {
+  const setFoodCalsReqs = async () => {
     await addDoc(foodcalreqs, {
       breakfast,
       cals,
       dinner,
       lunch,
+      uuid: auth.currentUser.uid,
     })
   }
 
@@ -45,10 +46,10 @@ function Dashboard({createdGoal, setCreatedGoal}) {
           messages: [
             { role: 'system', content: 'You only know how to speak in numbers and dont know how to speak in anything else. You are unable to add disclaimers or descriptions about what is going on.' },
             {
-              role: 'user', content: `Hi, my gender is: ${data.gender} my height is ${data.height} my current weight is ` +
-                `${data.weight}lbs. I would describe myself as ${data.active}. My dietary restrictions are: ` +
-                `${data.diet} and my underlying diseases are: ${data.disease}. I want to get to ` +
-                `${data.targetWeight}lbs within ${data.targetTime} please generate me a dietary plan that includes ` +
+              role: 'user', content: `Hi, my gender is: ${data[0].gender} my height is ${data[0].height} my current weight is ` +
+                `${data[0].weight}lbs. I would describe myself as ${data[0].active}. My dietary restrictions are: ` +
+                `${data[0].diet} and my underlying diseases are: ${data[0].disease}. I want to get to ` +
+                `${data[0].targetWeight}lbs within ${data[0].targetTime} please generate me a dietary plan that includes ` +
                 `optimal calories I can consume for breakfast, lunch, and dinner to get me to my weight goal in the target time. DO NOT UNCLUDE FOOD IDEAS AND DO NOT LIST THEM, PLEASE FOLLOW OUR FORMAT Please format it like this: Breakfast Calories,Lunch Calories,Dinner ` +
                 `Calories ONLY LIST THE NUMBERS AND MAKE SURE THE NUMBERS MAKE SENSE. REMEMBER, BREAKFAST CALORIES  HAS LESS THAN LUNCH CALORIES WHICH HAS LESS THAN DINNER CALORIES FIT IN THIS PLEASE. PLEASE ONLY GIVE THE NUMBERS SEPERATED BY COMMAS, PLEASE REMEMBER< YOU ARE ONLY ABLE TO TYPE NUMBERS`
             },
