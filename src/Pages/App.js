@@ -1,5 +1,4 @@
-import React from 'react';
-import Navbar from './Navbar';
+
 import './App.css';
 import LoginButton from '../login';
 import LogoutButton from '../logout';
@@ -8,9 +7,8 @@ import { useState } from 'react';
 import { auth } from '../firebase-config';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-
-import Home from '../components/Home';
-import CreateGoal from '../components/CreateGoal';
+import Home from "../components/Home";
+import CreateGoal from "../components/CreateGoal"
 import Dashboard from '../components/Dashboard';
 import ReportProgress from "../components/ReportProgress"
 import LogMeals from '../components/LogMeals';
@@ -61,21 +59,4 @@ function App() {
   );
 }
 
-
-
-const navApp = () => {
-  return (
-    <div>
-      <Navbar />
-      {/* Your main content goes here */}
-      <div>
-        <h1>Main Content</h1>
-        {/* Add your other components/content here */}
-      </div>
-    </div>
-  );
-}
-
 export default App;
-
-
