@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { auth } from '../firebase-config';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import Home from "./Home";
-import CreateGoal from './CreateGoal';
-import Dashboard from './Dashboard';
-import ReportProgress from "./ReportProgress"
-import LogMeals from './LogMeals';
+import Home from "../components/Home";
+import CreateGoal from "../components/CreateGoal"
+import Dashboard from '../components/Dashboard';
+import ReportProgress from "../components/ReportProgress"
+import LogMeals from '../components/LogMeals';
 import { signOut } from 'firebase/auth';
-import Login from './Login';
+import Login from '../components/Login';
 
 function App() {
   let loggedIn = false;
