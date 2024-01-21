@@ -16,6 +16,7 @@ import { signOut } from 'firebase/auth';
 import Login from './Pages/Login';
 
 function App() {
+  const [createdGoal, setCreatedGoal] = useState(false);
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const signUserOut = () => {
     signOut(auth).then(() => {
@@ -42,8 +43,8 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/creategoal" element={<CreateGoal />} />
+          <Route path="/dashboard" element={<Dashboard createdGoal={createdGoal} setCreatedGoal={setCreatedGoal}/>} />
+          <Route path="/creategoal" element={<CreateGoal createdGoal={setCreatedGoal}/>} />
           <Route path="/reportprogress" element={<ReportProgress />} />
           <Route path="/logmeal" element={<LogMeals />} />
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />

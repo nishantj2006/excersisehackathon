@@ -2,81 +2,169 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import OPENAI_API_KEY from "../openai";
 import { useState, useEffect } from "react";
-import { getDocs, collection, deleteDoc, doc, query, where } from "firebase/firestore";
-import { db, auth, firestore } from "../firebase-config";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db, auth } from "../firebase-config";
 
-function Dashboard() {
-  const userInfoRef = collection(db, "UserProperties")
-  const [userData, setUserData] = useState(null);
-
-  //Timeline
-  const timeline = () => {
-    //Draw plan from database
-  }
-
-  //meal ideas
-  const mealIdeas = () => {
-    //First let use select what grain, protein etc etc they are feeling
-    //Using that data, prompt gpt to provide meal ideas and format it in a way that we can parse through it
-  }
-
-  //logMeals
-  const logMeals = () => {
-    navigate('/logmeal')
-  }
-
+function Dashboard({createdGoal, setCreatedGoal}) {
+  const [UserData, setUserData] = useState(null);
   const [response, setResponse] = useState('');
+  let navigate = useNavigate();
+  const [cals, setCals] = useState([])
+  const [breakfast, setBreakfast] = useState('')
+  const [lunch, setLunch] = useState('')
+  const [dinner, setDinner] = useState('');
+
   useEffect(() => {
-    //Start of data retrival 
-    const getData = async () => {
+    const fetchData = async () => {
       const userId = auth.currentUser.uid;
       const docRef = collection(db, 'UserProperties');
-      const q = query(docRef, where("uuid" , "==", userId))
+      const q = query(docRef, where("uuid", "==", userId.toString()));
       const snap = await getDocs(q);
-      //userInfoRef.doc.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setUserData(snap)
-      console.log(snap);
-    }
-    getData();
-    const fetchData = async () => {
-      {}
+
+      const userDataArray = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setUserData(userDataArray);
+      const data = userDataArray;
+      console.log(userDataArray);
+      console.log(data[0].gender);
+
+      const endpoint = 'https://api.openai.com/v1/chat/completions';
+
       try {
-        const response = await axios.post(
-          'https://api.openai.com/v1/engines/davinci-codex/completions',
-          {
-            prompt: 'Hi, my gender is: ' + userData.gender + " my height is " + userData.height + " my current weight is " + 
-            userData.weight + ".I would describe myself as " + userData.active +". My dietary restrctions are: "+ userData.diet + " and my underlying diseases are: " +userData.disease 
-            + ". I want to get to " + userData.targetWeight + " witin " + userData.targetTime + " please generate me a dietary plan that includes maximum calories I can comsume for " +
-            "breakfast, lunch, and dinner and also pitch around 10 meal ideas per day for breakfast, lunch, and dinner, " + 
-            "Please format it like this: Day#,Breakfast Calories-Breakfast Ideas,Lunch Calories-Lunch Ideas,Dinner Calories-Dinner Ideas", 
-            max_tokens: 1000,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        const response = await axios.post(endpoint, {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            { role: 'system', content: 'You only know how to speak in numbers' },
+            {
+              role: 'user', content: `Hi, my gender is: ${data[0].gender} my height is ${data[0].height} my current weight is ` +
+                `${data[0].weight}lbs. I would describe myself as ${data[0].active}. My dietary restrictions are: ` +
+                `${data[0].diet} and my underlying diseases are: ${data[0].disease}. I want to get to ` +
+                `${data[0].targetWeight}lbs within ${data[0].targetTime} please generate me a dietary plan that includes ` +
+                `optimal calories I can consume for breakfast, lunch, and dinner to get me to my weight goal in the target time. DO NOT UNCLUDE FOOD IDEAS AND DO NOT LIST THEM, PLEASE FOLLOW OUR FORMAT Please format it like this: Breakfast Calories,Lunch Calories,Dinner ` +
+                `Calories ONLY LIST THE NUMBERS AND MAKE SURE THE NUMBERS MAKE SENSE. REMEMBER, BREAKFAST CALORIES  HAS LESS THAN LUNCH CALORIES WHICH HAS LESS THAN DINNER CALORIES FIT IN THIS PLEASE. PLEASE ONLY GIVE THE NUMBERS SEPERATED BY COMMAS`
             },
-          }
-        );
-        setResponse(response.data.choices[0].text);
+          ],
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+          },
+        });
+
+        const reply = response.data.choices[0].message.content;
+        setResponse(reply);
+        SetEverythingElseUp();
+        console.log(reply)
       } catch (error) {
         console.error('Error:', error);
       }
     };
+
     fetchData();
   }, []);
+  const SetEverythingElseUp = () => {
+    if (!createdGoal) {
+      setCals(response.split(','))
+      const GetBr = async () => {
+        const endpoint = 'https://api.openai.com/v1/chat/completions';
+
+
+        try {
+          const breakfast = await axios.post(endpoint, {
+            model: 'gpt-3.5-turbo',
+            messages: [
+              { role: 'system', content: 'You are a helpful assistant who can only speak in dishes and you dont give any confimation that you understand.' },
+              {
+                role: 'user', content: `Hi, please generate 15 breakfast ideas that are under ${cals[0]} Calories. Format them in: DISH IDEA, DISH IDEA etc.`
+              },
+            ],
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            },
+          });
+
+
+          const reply = breakfast.data.choices[0].message.content;
+          console.log(reply)
+          setBreakfast(reply)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }; GetBr();
+      const GetL = async () => {
+        const endpoint = 'https://api.openai.com/v1/chat/completions';
+
+
+        try {
+          const lunch = await axios.post(endpoint, {
+            model: 'gpt-3.5-turbo',
+            messages: [
+              { role: 'system', content: 'You are a helpful assistant who can only speak in dishes and you dont give any confimation that you understand.' },
+              {
+                role: 'user', content: `Hi, please generate 15 lunch ideas that are under ${cals[1]} Calories. Format them in: DISH IDEA, DISH IDEA etc.`
+              },
+            ],
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            },
+          });
+
+
+          const reply = lunch.data.choices[0].message.content;
+          console.log(reply)
+          setLunch(reply)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }; GetL();
+      const GetD = async () => {
+        const endpoint = 'https://api.openai.com/v1/chat/completions';
+
+
+        try {
+          const dinner = await axios.post(endpoint, {
+            model: 'gpt-3.5-turbo',
+            messages: [
+              { role: 'system', content: 'You are a helpful assistant who can only speak in dishes and you dont give any confimation that you understand.' },
+              {
+                role: 'user', content: `Hi, please generate 15 dinner ideas that are under ${cals[2]} Calories. Format them in: DISH IDEA, DISH IDEA etc.`
+              },
+            ],
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            },
+          });
+
+
+          const reply = dinner.data.choices[0].message.content;
+          console.log(reply)
+          setDinner(reply)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }; GetD();
+    }
+  }
+
+
   console.log(response);
-  let navigate = useNavigate();
+  console.log(UserData);
+
   return (
     <div className="Dashboard">
       <div className="timeline">
-        {/*Timeline jsx goes here*/}
+        {/* Timeline jsx goes here */}
       </div>
       <div className="mealIdeas">
         {/* JSX for meal ideas in the following order: */}
       </div>
       <div className="logMeals">
-        <button onClick={logMeals}>Log Meals</button>
+        <button onClick={() => navigate('/logmeal')}>Log Meals</button>
       </div>
     </div>
   );
