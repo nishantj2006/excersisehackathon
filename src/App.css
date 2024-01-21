@@ -89,14 +89,14 @@ label
   background: #1d2b3a;
 }
 
-.vertical-navbar {
+nav{
   background-color: #333;
   padding: 20px;
   color: white;
   text-align: right;
 }
 
-.vertical-navbar a {
+nav a{
   display: block;
   margin-bottom: 10px;
   text-decoration: none;
@@ -105,6 +105,6 @@ label
   transition: 0.3s;
 }
 
-.vertical-navbar a:hover {
+ nav a:hover {
   color: #ffc107;
 }
