@@ -39,7 +39,7 @@ function App() {
             <>
               <div class="dashboardLink"><Link to="/dashboard" class="dashboardLink"> Dashboard </Link></div>
 
-              <div class="createLink"><Link to="/creategoal" > Create Goal </Link></div>
+              <div class="createLink"><Link to="/creategoal" className='createLink'> Create Goal </Link></div>
               {/* <Link to="/reportprogress"> Report Progress </Link> */}
               <button onClick={signUserOut}> Log Out</button>
             </>
