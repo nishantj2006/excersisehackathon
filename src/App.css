@@ -90,21 +90,9 @@ label
 }
 
 nav{
-  background-color: #333;
-  padding: 20px;
-  color: white;
-  text-align: right;
-}
-
-nav a{
-  display: block;
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
- nav a:hover {
-  color: #ffc107;
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+  background-color: #333; /* Add your preferred background color */
+  padding: 10px; /* Add padding for better appearance */
+  color: white; /* Set text color */
 }
