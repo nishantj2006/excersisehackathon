@@ -32,6 +32,7 @@ function App() {
       {/*Routes*/}
       <Router>
         <nav class="navbar">
+          <h1 class="logoText">The Food Amendment</h1>
           {!isAuth ? (
             // <Link to="/login"> Login </Link>
 <Link></Link>

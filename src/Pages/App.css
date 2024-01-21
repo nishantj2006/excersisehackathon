@@ -128,7 +128,12 @@ nav{
   text-decoration: none;
 
 }
-
+.logoText{
+  margin-left:10px;
+  margin-right: auto;
+  size:70%;
+  font-family: 'Raedex Pro', sans-serif;
+}
 .createLink{
   color:black;
   align-self: center;
@@ -146,7 +151,7 @@ nav{
 }
 button{
   background-color: white;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 17.5px;
+  margin-bottom: 17.5px;
 }
 
