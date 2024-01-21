@@ -16,6 +16,7 @@ import { signOut } from 'firebase/auth';
 import Login from './Pages/Login';
 
 function App() {
+  let loggedIn = false;
   const [createdGoal, setCreatedGoal] = useState(false);
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const signUserOut = () => {
@@ -23,17 +24,19 @@ function App() {
       localStorage.clear();
       setIsAuth(false);
       window.location.pathname = "/login";
+      loggedIn = false;
     });
   };
   return (
     <div className="App">
       {/*Routes*/}
       <Router>
-        <nav className='vertical-navbar'>
+        <nav>
           {!isAuth ? (
-            <Link to="/login"> Login </Link>
-          ) : (
-            <>  
+            // <Link to="/login"> Login </Link>
+<Link></Link>
+            ) : (
+            <>
               <Link to="/dashboard"> Dashboard </Link>
               <Link to="/creategoal"> Create Goal </Link>
               <Link to="/reportprogress"> Report Progress </Link>
@@ -43,7 +46,7 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard createdGoal={createdGoal} setCreatedGoal={setCreatedGoal}/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/creategoal" element={<CreateGoal createdGoal={setCreatedGoal}/>} />
           <Route path="/reportprogress" element={<ReportProgress />} />
           <Route path="/logmeal" element={<LogMeals />} />
