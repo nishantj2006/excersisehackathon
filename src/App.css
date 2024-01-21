@@ -54,6 +54,11 @@ label
   color: white;
 }
 
+label
+{
+  color: rgba(255, 255, 255, 0.827);
+}
+
 .createGoalButton {
   background-color: #dddddd;
   color: black;
@@ -81,4 +86,24 @@ label
   font-size: 12px;
   font-family: 'Raedex Pro', sans-serif;
   background: #1d2b3a;
+}
+
+nav{
+  background-color: #333;
+  padding: 20px;
+  color: white;
+  text-align: right;
+}
+
+nav a{
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+ nav a:hover {
+  color: #ffc107;
 }
