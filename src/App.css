@@ -95,3 +95,14 @@ nav{
   padding: 10px; /* Add padding for better appearance */
   color: white; /* Set text color */
 }
+
+.color{
+  color: White;
+  font-family: 'Raedex Pro', sans-serif;
+}
+
+.cgContainer{
+  color: White;
+  font-family: 'Raedex Pro', sans-serif;
+
+}
