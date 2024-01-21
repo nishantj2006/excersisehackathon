@@ -16,6 +16,7 @@ import { signOut } from 'firebase/auth';
 import Login from './Pages/Login';
 
 function App() {
+  let loggedIn = false;
   const [createdGoal, setCreatedGoal] = useState(false);
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const signUserOut = () => {
@@ -23,6 +24,7 @@ function App() {
       localStorage.clear();
       setIsAuth(false);
       window.location.pathname = "/login";
+      loggedIn = false;
     });
   };
   return (
@@ -31,8 +33,9 @@ function App() {
       <Router>
         <nav>
           {!isAuth ? (
-            <Link to="/login"> Login </Link>
-          ) : (
+            // <Link to="/login"> Login </Link>
+<Link></Link>
+            ) : (
             <>
               <Link to="/dashboard"> Dashboard </Link>
               <Link to="/creategoal"> Create Goal </Link>

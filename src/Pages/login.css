@@ -1,0 +1,13 @@
+button.loginButton{
+    color:black;
+    background-color: aquamarine;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    font-size: 50px;
+    font-style:oblique;
+    position:relative;
+    top: 60px;
+}
