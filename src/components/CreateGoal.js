@@ -180,7 +180,7 @@ function CreateGoal() {
                     {otherSelectedG ? (<input className="inputBox"  placeholder="To have [insert your goal]..." onChange={(event) => { setGoal(event.target.value) }} />) : (<br />)}
                 </div>
 
-                <button onClick={setUserData}>Submit</button>
+                <button className="createGoalButton" onClick={setUserData}>Submit</button>
             </div>
         </div>
     );
