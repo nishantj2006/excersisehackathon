@@ -31,12 +31,11 @@ function Dashboard() {
           messages: [
             { role: 'system', content: 'You are a helpful assistant.' },
             { role: 'user', content: `Hi, my gender is: ${data[0].gender} my height is ${data[0].height} my current weight is ` +
-            `${data[0].weight}. I would describe myself as ${data[0].active}. My dietary restrictions are: ` +
+            `${data[0].weight}lbs. I would describe myself as ${data[0].active}. My dietary restrictions are: ` +
             `${data[0].diet} and my underlying diseases are: ${data[0].disease}. I want to get to ` +
-            `${data[0].targetWeight} within ${data[0].targetTime} please generate me a dietary plan that includes ` +
-            `maximum calories I can consume for breakfast, lunch, and dinner and also pitch around 10 meal ideas per day for breakfast, ` +
-            `lunch, and dinner. Please format it like this: Day#,Breakfast Calories-Breakfast Ideas,Lunch Calories-Lunch Ideas,Dinner ` +
-            `Calories-Dinner Ideas`},
+            `${data[0].targetWeight}lbs within ${data[0].targetTime} please generate me a dietary plan that includes ` +
+            `optimal calories I can consume for breakfast, lunch, and dinner to get me to my weight goal in the target time. Please format it like this: Breakfast Calories,Lunch Calories,Dinner ` +
+            `Calories`},
           ],
         }, {
           headers: {
@@ -47,6 +46,7 @@ function Dashboard() {
 
         const reply = response.data.choices[0].message.content;
         setResponse(reply);
+        console.log(reply)
       } catch (error) {
         console.error('Error:', error);
       }
