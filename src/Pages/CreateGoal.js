@@ -4,7 +4,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
 import Profile from "../profile";
 
-function CreateGoal() {
+function CreateGoal({createdGoal}) {
     const [otherSelectedD, setOtherSelectedD] = useState(false);
 
     const otherClickedD = () => {
@@ -56,6 +56,7 @@ function CreateGoal() {
             
         });
         navigate('/dashboard')
+        createdGoal(true);
     }
 
     return (

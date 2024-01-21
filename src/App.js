@@ -50,7 +50,7 @@ function App() {
           <Route path="/creategoal" element={<CreateGoal createdGoal={setCreatedGoal}/>} />
           <Route path="/reportprogress" element={<ReportProgress />} />
           <Route path="/logmeal" element={<LogMeals />} />
-          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+          <Route path="/login" element={<Login setIsAuth={setIsAuth} createdGoal={createdGoal}/>} />
         </Routes>
       </Router>
     </div>

@@ -58,7 +58,9 @@ label
 {
   color: rgba(255, 255, 255, 0.827);
 }
-
+.timeline {
+  flex-direction: column;
+}
 .createGoalButton {
   background-color: #dddddd;
   color: black;
@@ -94,4 +96,9 @@ nav{
   background-color: #333; /* Add your preferred background color */
   padding: 10px; /* Add padding for better appearance */
   color: white; /* Set text color */
+}
+
+.stuff{
+  color:lightgrey;
+  font-family: 'Raedex Pro', sans-serif;
 }
