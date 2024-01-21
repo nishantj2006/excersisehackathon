@@ -1,19 +1,19 @@
 
 import './App.css';
-import LoginButton from './login';
-import LogoutButton from './logout';
-import Profile from './profile';
+import LoginButton from '../login';
+import LogoutButton from '../logout';
+import Profile from '../profile';
 import { useState } from 'react';
-import { auth } from './firebase-config';
+import { auth } from '../firebase-config';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import Home from "./Pages/Home";
-import CreateGoal from './Pages/CreateGoal';
-import Dashboard from './Pages/Dashboard';
-import ReportProgress from "./Pages/ReportProgress"
-import LogMeals from './Pages/LogMeals';
+import Home from "./Home";
+import CreateGoal from './CreateGoal';
+import Dashboard from './Dashboard';
+import ReportProgress from "./ReportProgress"
+import LogMeals from './LogMeals';
 import { signOut } from 'firebase/auth';
-import Login from './Pages/Login';
+import Login from './Login';
 
 function App() {
   let loggedIn = false;
