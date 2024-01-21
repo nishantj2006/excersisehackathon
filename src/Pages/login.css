@@ -11,3 +11,8 @@ button.loginButton{
     position:relative;
     top: 60px;
 }
+
+.navbar{
+    width: 100%;
+
+}

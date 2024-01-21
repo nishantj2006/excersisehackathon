@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width:100%;
 }
 
 .App-logo {
@@ -110,3 +111,34 @@ nav{
   color: lightgray;
   font-family: 'Raedex Pro', sans-serif;
 }
+
+.dashboardLink{
+  color:black;
+  align-self: center;
+  /* padding-right: 500px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px; */
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  padding: 5px;
+  text-decoration: none;
+
+}
+
+.createLink{
+  color:black;
+  align-self: center;
+  /* padding-right: 500px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px; */
+  margin: 0;
+  padding-left: 40px;
+  background-color: white;
+  padding: 5px;
+  text-decoration: none;
+
+}
+

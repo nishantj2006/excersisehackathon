@@ -31,15 +31,16 @@ function App() {
     <div className="App">
       {/*Routes*/}
       <Router>
-        <nav>
+        <nav class="navbar">
           {!isAuth ? (
             // <Link to="/login"> Login </Link>
 <Link></Link>
             ) : (
             <>
-              <Link to="/dashboard"> Dashboard </Link>
-              <Link to="/creategoal"> Create Goal </Link>
-              <Link to="/reportprogress"> Report Progress </Link>
+              <div class="dashboardLink"><Link to="/dashboard" class="dashboardLink"> Dashboard </Link></div>
+
+              <div class="createLink"><Link to="/creategoal" > Create Goal </Link></div>
+              {/* <Link to="/reportprogress"> Report Progress </Link> */}
               <button onClick={signUserOut}> Log Out</button>
             </>
           )}
