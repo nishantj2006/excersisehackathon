@@ -7,7 +7,7 @@ import { db, auth, firestore } from "../firebase-config";
 
 function Dashboard() {
   const userInfoRef = collection(db, "UserProperties")
-  const [userData, setUserData] = useState(null);
+  const [UserData, setUserData] = useState(null);
 
   //Timeline
   const timeline = () => {
@@ -27,33 +27,26 @@ function Dashboard() {
 
   const [response, setResponse] = useState('');
   /*useEffect(() => {
-    //Start of data retrival 
     const getData = async () => {
-      const userId = auth.currentUser.uid;
-      const docRef = collection(db, 'UserProperties');
-      const q = query(docRef, where("uuid", "==", userId))
-      const snap = await getDocs(q);
-      //userInfoRef.doc.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setUserData(snap.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-      console.log(userData);
-    }
+      try {
+        const userId = auth.currentUser.uid;
+        const docRef = collection(db, 'UserProperties');
+        const q = query(docRef, where("uuid", "==", userId.toString()));
+        const snap = await getDocs(q);
+
+        // Update state with user data
+        const userDataArray = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        // setUserData(()=>{return userDataArray});
+
+        console.log(userDataArray);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
     getData();
-  },[])*/
+  }, []); // Run only once on component mount*/
   useEffect(() => {
-    //Start of data retrival 
-    const getData = async () => {
-      const userId = auth.currentUser.uid;
-      const docRef = collection(db, 'UserProperties');
-      const q = query(docRef, where("uuid", "==", userId.toString()))
-      const snap = await getDocs(q);
-
-      // Update state with user data
-      const userDataArray = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setUserData(userDataArray);
-
-      console.log(userDataArray); // This will log the correct data
-    }
-    getData();
     const fetchData = async () => {
       //Start of data retrival 
       const getData = async () => {
@@ -65,20 +58,20 @@ function Dashboard() {
         // Update state with user data
         const userDataArray = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         setUserData(userDataArray);
-
+        const data = userDataArray
         console.log(userDataArray); // This will log the correct data
-        console.log(userData.height);
-      }
-      { }
-      try {
+        console.log(data[0].gender)
+        await getData();
         const response = await axios.post(
           'https://api.openai.com/v1/engines/davinci-codex/completions',
           {
-            prompt: 'Hi, my gender is: ' + userData.gender + " my height is " + userData.height + " my current weight is " +
-              userData.weight + ".I would describe myself as " + userData.active + ". My dietary restrctions are: " + userData.diet + " and my underlying diseases are: " + userData.disease
-              + ". I want to get to " + userData.targetWeight + " witin " + userData.targetTime + " please generate me a dietary plan that includes maximum calories I can comsume for " +
-              "breakfast, lunch, and dinner and also pitch around 10 meal ideas per day for breakfast, lunch, and dinner, " +
-              "Please format it like this: Day#,Breakfast Calories-Breakfast Ideas,Lunch Calories-Lunch Ideas,Dinner Calories-Dinner Ideas",
+            prompt: `Hi, my gender is: ${data[0].gender} my height is ${data[0].height} my current weight is ` +
+              `${data[0].weight}. I would describe myself as ${data[0].active}. My dietary restrictions are: ` +
+              `${data[0].diet} and my underlying diseases are: ${data[0].disease}. I want to get to ` +
+              `${data[0].targetWeight} within ${data[0].targetTime} please generate me a dietary plan that includes ` +
+              `maximum calories I can consume for breakfast, lunch, and dinner and also pitch around 10 meal ideas per day for breakfast, ` +
+              `lunch, and dinner. Please format it like this: Day#,Breakfast Calories-Breakfast Ideas,Lunch Calories-Lunch Ideas,Dinner ` +
+              `Calories-Dinner Ideas`,
             max_tokens: 1000,
           },
           {
@@ -89,13 +82,12 @@ function Dashboard() {
           }
         );
         setResponse(response.data.choices[0].text);
-      } catch (error) {
-        console.error('Error:', error);
       }
+      await getData()
     };
-    fetchData();
   }, []);
   console.log(response);
+  console.log(UserData);
   let navigate = useNavigate();
   return (
     <div className="Dashboard">
